@@ -1,47 +1,109 @@
-/* Reset some default styles */
+/* Reset default margins and paddings */
 body, h1, h2, p, ul, li {
   margin: 0;
   padding: 0;
 }
 
-/* Basic styling for body and container elements */
+/* Overall page styling */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  padding: 20px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   color: #333;
+  padding: 20px;
 }
 
-/* Header styling */
-header {
-  background-color: #f4f4f4;
-  padding: 10px;
+/* Hero section styling with flair */
+header .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+  color: #fff;
+  padding: 40px 20px;
+  border-radius: 8px;
   margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+header .hero .gear {
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  margin-right: 20px;
+  animation: rotate 5s linear infinite;
+  cursor: pointer;
+}
+
+header .hero .gear::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+header .hero .hero-text h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+header .hero .hero-text p {
+  font-size: 1.2rem;
+}
+
+/* Gear rotation animation */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Navigation menu styling */
 nav ul {
   list-style: none;
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 20px;
   padding: 10px 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 nav a {
   text-decoration: none;
   color: #333;
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
-/* Section styling */
-section {
+nav a:hover {
+  color: #2989d8;
+}
+
+/* Main content sections */
+main section {
   margin-bottom: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main section h2 {
+  margin-bottom: 10px;
 }
 
 /* Footer styling */
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #f4f4f4;
-  margin-top: 20px;
+  color: #777;
 }
