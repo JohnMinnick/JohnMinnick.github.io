@@ -1,18 +1,14 @@
 // scripts.js
-// This file adds a bit of interactive flair to the homepage.
+// Adds interactivity to the animated garden.
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("Welcome to John Minnick's Engineering Hub!");
+  console.log("Welcome to the Garden!");
 
-  // Add a simple interaction: clicking the gear speeds up its rotation briefly.
-  const gear = document.querySelector('.gear');
-  if (gear) {
-    gear.addEventListener('click', () => {
-      console.log("Gear clicked! Engineering in motion.");
-      gear.style.animationDuration = "2.5s";
-      setTimeout(() => {
-        gear.style.animationDuration = "5s";
-      }, 1000);
+  // Clicking on any GIF will toggle a zoom effect.
+  const gifImages = document.querySelectorAll('.gif-container img');
+  gifImages.forEach((img) => {
+    img.addEventListener('click', () => {
+      img.classList.toggle('zoom');
     });
-  }
+  });
 });
