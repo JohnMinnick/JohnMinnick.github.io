@@ -1,5 +1,5 @@
-/* Reset default margins and paddings */
-body, h1, h2, p, ul, li {
+/* Reset defaults */
+body, h1, p, ul, li {
   margin: 0;
   padding: 0;
 }
@@ -7,103 +7,90 @@ body, h1, h2, p, ul, li {
 /* Overall page styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  background-color: #f9f9f9;
+  background: #e0f7fa; /* Light sky-blue background */
   color: #333;
-  padding: 20px;
 }
 
-/* Hero section styling with flair */
-header .hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+/* Header with garden flair */
+header .garden-header {
+  background: linear-gradient(to right, #a8e063, #56ab2f);
+  padding: 30px 20px;
+  text-align: center;
   color: #fff;
-  padding: 40px 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
+  border-bottom: 4px solid #4e8c2a;
 }
 
-header .hero .gear {
-  width: 80px;
-  height: 80px;
-  border: 8px solid rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  margin-right: 20px;
-  animation: rotate 5s linear infinite;
-  cursor: pointer;
-}
-
-header .hero .gear::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-header .hero .hero-text h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-header .hero .hero-text p {
-  font-size: 1.2rem;
-}
-
-/* Gear rotation animation */
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Navigation menu styling */
+/* Navigation styling */
 nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
   gap: 20px;
+  background: #fff;
   padding: 10px 0;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav a {
   text-decoration: none;
-  color: #333;
-  font-weight: 600;
+  color: #56ab2f;
+  font-weight: bold;
   transition: color 0.3s;
 }
 
 nav a:hover {
-  color: #2989d8;
+  color: #4e8c2a;
 }
 
-/* Main content sections */
-main section {
-  margin-bottom: 20px;
-  background: #fff;
+/* Main garden area */
+main {
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-main section h2 {
-  margin-bottom: 10px;
+.animated-garden {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.gif-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border: 3px solid #56ab2f;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gif-container img {
+  max-width: 100%;
+  max-height: 100%;
+  animation: sway 3s ease-in-out infinite;
+}
+
+/* Sway animation to simulate a gentle breeze */
+@keyframes sway {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Zoom effect on click */
+.gif-container img.zoom {
+  transform: scale(1.2);
+  transition: transform 0.3s;
 }
 
 /* Footer styling */
 footer {
   text-align: center;
-  padding: 10px;
-  color: #777;
+  padding: 15px;
+  background: #a8e063;
+  color: #fff;
+  margin-top: 20px;
 }
