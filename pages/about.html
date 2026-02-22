@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>About — John Minnick</title>
+    <meta name="description"
+        content="About John Minnick — developer, builder, and tinkerer. Skills, experience, and contact info.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="About — John Minnick">
+    <meta property="og:description" content="About John Minnick — developer, builder, and tinkerer.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/pages/about.css">
+
+    <!-- Fade-in animation styles -->
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .fade-in-delay-2 {
+            transition-delay: 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       Navigation
+       ============================================================ -->
+    <nav class="nav" id="main-nav">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__logo">JM</a>
+            <ul class="nav__links" id="nav-links">
+                <li><a href="../index.html" class="nav__link">Home</a></li>
+                <li><a href="projects.html" class="nav__link">Projects</a></li>
+                <li><a href="playground.html" class="nav__link">Playground</a></li>
+                <li><a href="about.html" class="nav__link nav__link--active">About</a></li>
+            </ul>
+            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <main>
+        <!-- ============================================================
+         Page Header
+         ============================================================ -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-header__title fade-in">About Me</h1>
+                <p class="page-header__desc fade-in fade-in-delay-1">
+                    Developer, builder, tinkerer — and occasionally, a human.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         About Content
+         ============================================================ -->
+        <section class="section">
+            <div class="container">
+                <div class="about-content">
+
+                    <!-- Main bio content -->
+                    <div class="about-bio fade-in">
+                        <h3>Hey there 👋</h3>
+                        <p>
+                            I'm John — a developer who loves building things that are fun, useful,
+                            or ideally both. My work spans machine learning research, web development,
+                            and interactive experiences.
+                        </p>
+                        <p>
+                            I'm currently working on neural spike forecasting research (SpikeProphecy)
+                            and building this website as a creative playground. I believe the best way
+                            to learn is by making things, so I'm always tinkering with something new.
+                        </p>
+                        <p>
+                            When I'm not writing code, you'll probably find me exploring new technologies,
+                            playing games, or dreaming up my next side project.
+                        </p>
+
+                        <!-- Skills Grid -->
+                        <div class="skills-section">
+                            <h3>Skills & Tools</h3>
+                            <div class="skills-grid">
+
+                                <div class="skill-category fade-in">
+                                    <h4 class="skill-category__title">Languages</h4>
+                                    <ul class="skill-category__list">
+                                        <li>Python</li>
+                                        <li>JavaScript / ES6+</li>
+                                        <li>HTML5 / CSS3</li>
+                                        <li>SQL</li>
+                                    </ul>
+                                </div>
+
+                                <div class="skill-category fade-in fade-in-delay-1">
+                                    <h4 class="skill-category__title">ML / AI</h4>
+                                    <ul class="skill-category__list">
+                                        <li>PyTorch</li>
+                                        <li>Neural Networks</li>
+                                        <li>Knowledge Distillation</li>
+                                        <li>Data Analysis</li>
+                                    </ul>
+                                </div>
+
+                                <div class="skill-category fade-in">
+                                    <h4 class="skill-category__title">Web Development</h4>
+                                    <ul class="skill-category__list">
+                                        <li>Responsive Design</li>
+                                        <li>Canvas / WebGL</li>
+                                        <li>CSS Animations</li>
+                                        <li>Accessibility</li>
+                                    </ul>
+                                </div>
+
+                                <div class="skill-category fade-in fade-in-delay-1">
+                                    <h4 class="skill-category__title">Tools & Workflow</h4>
+                                    <ul class="skill-category__list">
+                                        <li>Git / GitHub</li>
+                                        <li>Linux / CLI</li>
+                                        <li>Docker / Kubernetes</li>
+                                        <li>VS Code</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside class="about-sidebar">
+
+                        <!-- Quick Links -->
+                        <div class="info-card fade-in">
+                            <h3 class="info-card__title">Links</h3>
+                            <div class="info-card__links">
+                                <a href="https://github.com/JohnMinnick" class="info-card__link" target="_blank"
+                                    rel="noopener">
+                                    🔗 GitHub
+                                </a>
+                                <a href="https://linkedin.com/in/johnminnick" class="info-card__link" target="_blank"
+                                    rel="noopener">
+                                    🔗 LinkedIn
+                                </a>
+                                <a href="mailto:hello@johnminnick.com" class="info-card__link">
+                                    ✉️ Email
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Fun Facts -->
+                        <div class="info-card fade-in fade-in-delay-1">
+                            <h3 class="info-card__title">Quick Facts</h3>
+                            <div class="info-card__links">
+                                <span class="info-card__link">☕ Fuel: Coffee</span>
+                                <span class="info-card__link">🧠 Favorite topic: Neural Networks</span>
+                                <span class="info-card__link">🎮 Hobby: Game Dev</span>
+                                <span class="info-card__link">🚀 Mode: Always building</span>
+                            </div>
+                        </div>
+
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+       Footer
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer__links">
+                <li><a href="../index.html" class="footer__link">Home</a></li>
+                <li><a href="projects.html" class="footer__link">Projects</a></li>
+                <li><a href="playground.html" class="footer__link">Playground</a></li>
+                <li><a href="about.html" class="footer__link">About</a></li>
+            </ul>
+            <p class="footer__text">&copy; 2026 John Minnick. Built with ☕ and vanilla code.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

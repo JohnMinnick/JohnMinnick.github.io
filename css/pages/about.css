@@ -1,0 +1,141 @@
+/* ============================================================
+   about.css — About Page Styles
+   ============================================================ */
+
+/* ---- About Content Layout ---- */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+    padding-bottom: var(--space-3xl);
+}
+
+/* ---- Bio Section ---- */
+.about-bio h3 {
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-md);
+    font-size: var(--text-xl);
+}
+
+.about-bio p {
+    margin-bottom: var(--space-md);
+    line-height: 1.8;
+}
+
+/* ---- Skills List ---- */
+.skills-section {
+    margin-top: var(--space-2xl);
+}
+
+.skills-section h3 {
+    margin-bottom: var(--space-lg);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+/* Individual skill category card */
+.skill-category {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-base);
+}
+
+.skill-category:hover {
+    border-color: var(--color-accent-primary-20);
+    transform: translateY(-2px);
+}
+
+.skill-category__title {
+    font-size: var(--text-base);
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-sm);
+    font-weight: var(--weight-semibold);
+}
+
+.skill-category__list {
+    list-style: none;
+}
+
+.skill-category__list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    padding: var(--space-2xs) 0;
+    position: relative;
+    padding-left: var(--space-md);
+}
+
+/* Small colored dot before each skill */
+.skill-category__list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-primary);
+    font-size: var(--text-xs);
+}
+
+/* ---- Sidebar Info ---- */
+.about-sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-xl));
+}
+
+/* Info card (links, contact, etc.) */
+.info-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.info-card__title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-primary);
+}
+
+/* Link list inside info card */
+.info-card__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.info-card__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-md);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.info-card__link:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-accent-primary);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-sidebar {
+        position: static;
+    }
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>Projects — John Minnick</title>
+    <meta name="description"
+        content="Projects and work by John Minnick. Machine learning, web development, games, and more.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Projects — John Minnick">
+    <meta property="og:description" content="Projects and work by John Minnick.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/pages/projects.css">
+
+    <!-- Fade-in animation styles -->
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .fade-in-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .fade-in-delay-3 {
+            transition-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       Navigation
+       ============================================================ -->
+    <nav class="nav" id="main-nav">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__logo">JM</a>
+            <ul class="nav__links" id="nav-links">
+                <li><a href="../index.html" class="nav__link">Home</a></li>
+                <li><a href="projects.html" class="nav__link nav__link--active">Projects</a></li>
+                <li><a href="playground.html" class="nav__link">Playground</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+            </ul>
+            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <main>
+        <!-- ============================================================
+         Page Header
+         ============================================================ -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-header__title fade-in">Projects</h1>
+                <p class="page-header__desc fade-in fade-in-delay-1">
+                    Things I've built. From machine learning research to games and tools.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         Projects Grid
+         ============================================================ -->
+        <section class="section">
+            <div class="container">
+
+                <!-- Filter buttons (cosmetic for now — can wire up later) -->
+                <div class="projects-filters fade-in">
+                    <button class="filter-btn filter-btn--active">All</button>
+                    <button class="filter-btn">ML / AI</button>
+                    <button class="filter-btn">Web</button>
+                    <button class="filter-btn">Games</button>
+                </div>
+
+                <div class="projects-grid">
+
+                    <!-- Project: SpikeProphecy -->
+                    <div class="project-card fade-in">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a0a2e);">
+                            🧠
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">SpikeProphecy</h3>
+                            <p class="project-card__desc">
+                                Neural spike-count forecasting using teacher-student knowledge distillation.
+                                LSTM teacher trained on real neuroscience data with NWB format support,
+                                multi-session training, and hyperparameter sweep infrastructure.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">Neuroscience</span>
+                                <span class="tag">LSTM</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://github.com/JohnMinnick/SpikeProphecy" class="project-card__link"
+                                    target="_blank" rel="noopener">GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: This Website -->
+                    <div class="project-card fade-in fade-in-delay-1">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0a1a2e);">
+                            🌐
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">johnminnick.github.io</h3>
+                            <p class="project-card__desc">
+                                This portfolio site. Built from scratch with vanilla HTML, CSS, and JavaScript.
+                                Features interactive particle backgrounds, responsive design, and a playground
+                                section with mini-games.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Canvas</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://github.com/JohnMinnick/JohnMinnick.github.io"
+                                    class="project-card__link" target="_blank" rel="noopener">GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder: More projects -->
+                    <div class="project-card fade-in fade-in-delay-2">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a1a0e);">
+                            🚧
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">More Coming Soon</h3>
+                            <p class="project-card__desc">
+                                Always building something new. Check back soon or visit my GitHub
+                                to see what I'm currently working on.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Stay Tuned</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://github.com/JohnMinnick" class="project-card__link" target="_blank"
+                                    rel="noopener">My GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+       Footer
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer__links">
+                <li><a href="../index.html" class="footer__link">Home</a></li>
+                <li><a href="projects.html" class="footer__link">Projects</a></li>
+                <li><a href="playground.html" class="footer__link">Playground</a></li>
+                <li><a href="about.html" class="footer__link">About</a></li>
+            </ul>
+            <p class="footer__text">&copy; 2026 John Minnick. Built with ☕ and vanilla code.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

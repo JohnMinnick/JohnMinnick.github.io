@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>Playground — John Minnick</title>
+    <meta name="description" content="Interactive experiments, mini-games, and creative coding toys by John Minnick.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Playground — John Minnick">
+    <meta property="og:description" content="Interactive experiments, mini-games, and creative coding toys.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/pages/playground.css">
+
+    <!-- Fade-in animation styles -->
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .fade-in-delay-2 {
+            transition-delay: 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       Navigation
+       ============================================================ -->
+    <nav class="nav" id="main-nav">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__logo">JM</a>
+            <ul class="nav__links" id="nav-links">
+                <li><a href="../index.html" class="nav__link">Home</a></li>
+                <li><a href="projects.html" class="nav__link">Projects</a></li>
+                <li><a href="playground.html" class="nav__link nav__link--active">Playground</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+            </ul>
+            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <main>
+        <!-- ============================================================
+         Page Header
+         ============================================================ -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-header__title fade-in">🕹️ Playground</h1>
+                <p class="page-header__desc fade-in fade-in-delay-1">
+                    Interactive toys, mini-games, and creative coding experiments.
+                    Because coding should be fun.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         Games / Toys Grid
+         ============================================================ -->
+        <section class="section">
+            <div class="container">
+                <div class="playground-grid">
+
+                    <!-- Placeholder cards — these will link to actual games -->
+                    <a href="#" class="game-card fade-in">
+                        <div class="game-card__preview">🎨</div>
+                        <div class="game-card__body">
+                            <h3 class="game-card__title">Particle Playground</h3>
+                            <p class="game-card__desc">
+                                Interactive particle system — click, drag, and watch particles
+                                come alive with physics and color.
+                            </p>
+                            <div class="game-card__tags">
+                                <span class="tag">Canvas</span>
+                                <span class="tag">Physics</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="game-card fade-in fade-in-delay-1">
+                        <div class="game-card__preview">🐍</div>
+                        <div class="game-card__body">
+                            <h3 class="game-card__title">Snake</h3>
+                            <p class="game-card__desc">
+                                Classic Snake reimagined with a neon aesthetic and
+                                smooth controls. How long can you survive?
+                            </p>
+                            <div class="game-card__tags">
+                                <span class="tag">Game</span>
+                                <span class="tag">Canvas</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="game-card fade-in fade-in-delay-2">
+                        <div class="game-card__preview">✨</div>
+                        <div class="game-card__body">
+                            <h3 class="game-card__title">More Experiments</h3>
+                            <p class="game-card__desc">
+                                More interactive toys and experiments are on the way.
+                                Check back soon!
+                            </p>
+                            <div class="game-card__tags">
+                                <span class="tag">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+       Footer
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer__links">
+                <li><a href="../index.html" class="footer__link">Home</a></li>
+                <li><a href="projects.html" class="footer__link">Projects</a></li>
+                <li><a href="playground.html" class="footer__link">Playground</a></li>
+                <li><a href="about.html" class="footer__link">About</a></li>
+            </ul>
+            <p class="footer__text">&copy; 2026 John Minnick. Built with ☕ and vanilla code.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
