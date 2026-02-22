@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <title>John Minnick — Developer, Builder, Tinkerer</title>
-  <meta name="description" content="Personal portfolio and playground of John Minnick. Projects, experiments, mini-games, and more.">
+  <title>John Minnick — Researcher, Developer, Builder</title>
+  <meta name="description"
+    content="Personal portfolio of John Minnick — PhD student at UC Santa Cruz building neural interfaces, computer vision pipelines, and spiking neural networks.">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="John Minnick — Developer, Builder, Tinkerer">
-  <meta property="og:description" content="Personal portfolio and playground. Projects, experiments, mini-games, and more.">
+  <meta property="og:title" content="John Minnick — Researcher, Developer, Builder">
+  <meta property="og:description"
+    content="PhD student at UC Santa Cruz. Neural interfaces, computer vision, spiking neural networks, and more.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://johnminnick.github.io/">
 
   <!-- Google Fonts: Space Grotesk (headings) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/reset.css">
@@ -33,17 +38,31 @@
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
+
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     /* Staggered delays for children */
-    .fade-in-delay-1 { transition-delay: 0.1s; }
-    .fade-in-delay-2 { transition-delay: 0.2s; }
-    .fade-in-delay-3 { transition-delay: 0.3s; }
-    .fade-in-delay-4 { transition-delay: 0.4s; }
+    .fade-in-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .fade-in-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .fade-in-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .fade-in-delay-4 {
+      transition-delay: 0.4s;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- ============================================================
@@ -92,8 +111,9 @@
         <p class="hero__greeting">👋 Hey, I'm</p>
         <h1 class="hero__title"><span>John Minnick</span></h1>
         <p class="hero__tagline">
-          Developer, builder, and tinkerer. I make things with code —
-          from neural networks to mini-games and everything in between.
+          PhD student at UC Santa Cruz building neural interfaces,
+          computer vision pipelines, and spiking neural networks.
+          I make research tools and break things in the best way possible.
         </p>
         <div class="hero__cta">
           <a href="pages/projects.html" class="btn btn--primary">View My Work</a>
@@ -118,44 +138,47 @@
         <!-- Text side -->
         <div class="about-preview__text fade-in">
           <p>
-            I'm a developer who loves building things that are fun, useful, or both.
-            My work spans machine learning research, web development, and interactive experiences.
-            I believe the best way to learn is by making stuff — so I make a lot of stuff.
+            I'm a PhD student in Electrical and Computer Engineering at UC Santa Cruz,
+            working in the Braingeneers Group at the Genomics Institute. My research
+            sits at the intersection of computer vision, deep learning, and neuroscience —
+            building tools that help us understand how living brain tissue works.
           </p>
           <p>
-            When I'm not coding, you'll probably find me exploring new technologies,
-            playing games, or coming up with my next side project.
+            From designing microfluidic devices and flying drones over Icelandic volcanoes
+            to training spiking neural networks, I love work that spans hardware and software.
+            If it involves building something from scratch, I'm probably interested.
           </p>
 
           <!-- Skill tags -->
           <div class="about-preview__skills">
             <span class="tag">Python</span>
             <span class="tag">PyTorch</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Web Dev</span>
-            <span class="tag">Neural Networks</span>
-            <span class="tag">Game Dev</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">snnTorch</span>
+            <span class="tag">Microfluidics</span>
+            <span class="tag">Embedded Systems</span>
           </div>
         </div>
 
         <!-- Stats side -->
         <div class="about-preview__stats fade-in fade-in-delay-1">
           <div class="stat-card">
-            <span class="stat-card__number">∞</span>
-            <span class="stat-card__label">Curiosity Level</span>
+            <span class="stat-card__number">6</span>
+            <span class="stat-card__label">Publications</span>
           </div>
           <div class="stat-card">
-            <span class="stat-card__number">☕</span>
-            <span class="stat-card__label">Fuel Source</span>
+            <span class="stat-card__number">$5.9M</span>
+            <span class="stat-card__label">Grant Contributions</span>
           </div>
           <div class="stat-card">
             <span class="stat-card__number">🧠</span>
-            <span class="stat-card__label">Favorite Organ</span>
+            <span class="stat-card__label">Brain Organoid Wrangler</span>
           </div>
           <div class="stat-card">
-            <span class="stat-card__number">🚀</span>
-            <span class="stat-card__label">Default Mode</span>
+            <span class="stat-card__number">🌋</span>
+            <span class="stat-card__label">Former Volcano Drone Pilot</span>
           </div>
         </div>
       </div>
@@ -181,64 +204,67 @@
 
         <!-- Project Card: SpikeProphecy -->
         <div class="project-card fade-in">
-          <div class="project-card__image-placeholder" style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a0a2e);">
+          <div class="project-card__image-placeholder"
+            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a0a2e);">
             🧠
           </div>
           <div class="project-card__body">
             <h3 class="project-card__title">SpikeProphecy</h3>
             <p class="project-card__desc">
-              Neural spike forecasting with teacher-student distillation.
-              PyTorch teacher model with LSTM architecture trained on real neural data.
+              ANN-to-SNN distillation framework for spike-count forecasting.
+              Distilled a 270K-param LSTM into a 22K-param SNN — 92% parameter reduction
+              with matching accuracy on real Neuropixels data.
             </p>
             <div class="project-card__tags">
-              <span class="tag">Python</span>
               <span class="tag">PyTorch</span>
+              <span class="tag">snnTorch</span>
               <span class="tag">Neuroscience</span>
             </div>
             <div class="project-card__links">
-              <a href="https://github.com/JohnMinnworked/SpikeProphecy" class="project-card__link" target="_blank" rel="noopener">GitHub →</a>
+              <a href="https://github.com/JohnMinnick/SpikeProphecy" class="project-card__link" target="_blank"
+                rel="noopener">GitHub →</a>
             </div>
           </div>
         </div>
 
-        <!-- Project Card: This Website -->
+        <!-- Project Card: In-Incubator Microscope -->
         <div class="project-card fade-in fade-in-delay-1">
-          <div class="project-card__image-placeholder" style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0a1a2e);">
-            🌐
+          <div class="project-card__image-placeholder"
+            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0a1a2e);">
+            🔬
           </div>
           <div class="project-card__body">
-            <h3 class="project-card__title">This Website</h3>
+            <h3 class="project-card__title">In-Incubator Microscope</h3>
             <p class="project-card__desc">
-              My personal portfolio and playground. Built from scratch with
-              vanilla HTML, CSS, and JavaScript. No frameworks, no build tools.
+              Modular automated epifluorescence microscope for continuous in-incubator
+              live cell imaging. Built the imaging automation, stabilization, and
+              alignment software. Under review at Nature Comms Engineering.
             </p>
             <div class="project-card__tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-            </div>
-            <div class="project-card__links">
-              <a href="https://github.com/JohnMinnick/JohnMinnick.github.io" class="project-card__link" target="_blank" rel="noopener">GitHub →</a>
+              <span class="tag">Python</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Hardware</span>
             </div>
           </div>
         </div>
 
-        <!-- Project Card: Placeholder for more projects -->
+        <!-- Project Card: Cell Tracking Suite -->
         <div class="project-card fade-in fade-in-delay-2">
-          <div class="project-card__image-placeholder" style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a1a0e);">
-            🚧
+          <div class="project-card__image-placeholder"
+            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a1a0e);">
+            🎯
           </div>
           <div class="project-card__body">
-            <h3 class="project-card__title">More Coming Soon</h3>
+            <h3 class="project-card__title">Cell Tracking Suite</h3>
             <p class="project-card__desc">
-              I'm always building something new. Check back soon for more
-              projects or visit my GitHub to see what I'm working on.
+              Dual-color fluorescence microscopy tracker that replaces days of manual
+              annotation with minutes of batch processing. Captures 25–40% more objects
+              than single-stage methods.
             </p>
             <div class="project-card__tags">
-              <span class="tag">Stay Tuned</span>
-            </div>
-            <div class="project-card__links">
-              <a href="https://github.com/JohnMinnick" class="project-card__link" target="_blank" rel="noopener">My GitHub →</a>
+              <span class="tag">Python</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Computer Vision</span>
             </div>
           </div>
         </div>
@@ -292,7 +318,7 @@
         <span class="section-header__subtitle">Get in Touch</span>
         <h2 class="section-header__title">Let's Connect</h2>
         <p class="section-header__desc">
-          Interested in working together, or just want to say hi?
+          Interested in collaborating, or just want to talk about brains and robots?
         </p>
       </div>
 
@@ -303,7 +329,7 @@
         <a href="https://linkedin.com/in/johnminnick" class="btn btn--secondary" target="_blank" rel="noopener">
           LinkedIn
         </a>
-        <a href="mailto:hello@johnminnick.com" class="btn btn--primary">
+        <a href="mailto:jrminnic@ucsc.edu" class="btn btn--primary">
           Say Hello 👋
         </a>
       </div>
@@ -331,4 +357,5 @@
   <script src="js/main.js"></script>
   <script src="js/pages/home.js"></script>
 </body>
+
 </html>

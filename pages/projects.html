@@ -8,11 +8,12 @@
     <!-- SEO -->
     <title>Projects — John Minnick</title>
     <meta name="description"
-        content="Projects and work by John Minnick. Machine learning, web development, games, and more.">
+        content="Projects by John Minnick — neural spike forecasting, computer vision pipelines, microfluidic devices, and more.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Projects — John Minnick">
-    <meta property="og:description" content="Projects and work by John Minnick.">
+    <meta property="og:description"
+        content="Projects by John Minnick — research tools, ML pipelines, and hardware systems.">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts -->
@@ -85,7 +86,7 @@
             <div class="container">
                 <h1 class="page-header__title fade-in">Projects</h1>
                 <p class="page-header__desc fade-in fade-in-delay-1">
-                    Things I've built. From machine learning research to games and tools.
+                    Research tools, ML pipelines, hardware systems, and everything in between.
                 </p>
             </div>
         </section>
@@ -96,12 +97,13 @@
         <section class="section">
             <div class="container">
 
-                <!-- Filter buttons (cosmetic for now — can wire up later) -->
+                <!-- Filter buttons -->
                 <div class="projects-filters fade-in">
                     <button class="filter-btn filter-btn--active">All</button>
                     <button class="filter-btn">ML / AI</button>
-                    <button class="filter-btn">Web</button>
-                    <button class="filter-btn">Games</button>
+                    <button class="filter-btn">Computer Vision</button>
+                    <button class="filter-btn">Hardware</button>
+                    <button class="filter-btn">Tools</button>
                 </div>
 
                 <div class="projects-grid">
@@ -115,15 +117,15 @@
                         <div class="project-card__body">
                             <h3 class="project-card__title">SpikeProphecy</h3>
                             <p class="project-card__desc">
-                                Neural spike-count forecasting using teacher-student knowledge distillation.
-                                LSTM teacher trained on real neuroscience data with NWB format support,
-                                multi-session training, and hyperparameter sweep infrastructure.
+                                ANN-to-SNN distillation framework for spike-count forecasting from MEA recordings.
+                                Distilled a 270K-param LSTM teacher into a 22K-param SNN (92% reduction) with
+                                matching accuracy. Trained on 58 min of real Steinmetz 2019 Neuropixels data.
+                                270+ unit/integration tests, YAML-driven reproducible ML scaffold.
                             </p>
                             <div class="project-card__tags">
-                                <span class="tag">Python</span>
                                 <span class="tag">PyTorch</span>
-                                <span class="tag">Neuroscience</span>
-                                <span class="tag">LSTM</span>
+                                <span class="tag">snnTorch</span>
+                                <span class="tag">Knowledge Distillation</span>
                             </div>
                             <div class="project-card__links">
                                 <a href="https://github.com/JohnMinnick/SpikeProphecy" class="project-card__link"
@@ -132,50 +134,173 @@
                         </div>
                     </div>
 
-                    <!-- Project: This Website -->
+                    <!-- Project: In-Incubator Microscope -->
                     <div class="project-card fade-in fade-in-delay-1">
                         <div class="project-card__image-placeholder"
                             style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0a1a2e);">
-                            🌐
+                            🔬
                         </div>
                         <div class="project-card__body">
-                            <h3 class="project-card__title">johnminnick.github.io</h3>
+                            <h3 class="project-card__title">In-Incubator Microscope</h3>
                             <p class="project-card__desc">
-                                This portfolio site. Built from scratch with vanilla HTML, CSS, and JavaScript.
-                                Features interactive particle backgrounds, responsive design, and a playground
-                                section with mini-games.
+                                Modular automated epifluorescence microscope for continuous in-incubator live
+                                cell imaging. Built imaging automation for plate scanning, multi-channel
+                                acquisition, and drift-corrected mosaic stitching of longitudinal datasets.
+                                Under review at Nature Communications Engineering.
                             </p>
                             <div class="project-card__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">Canvas</span>
-                            </div>
-                            <div class="project-card__links">
-                                <a href="https://github.com/JohnMinnick/JohnMinnick.github.io"
-                                    class="project-card__link" target="_blank" rel="noopener">GitHub →</a>
+                                <span class="tag">Python</span>
+                                <span class="tag">OpenCV</span>
+                                <span class="tag">scikit-image</span>
+                                <span class="tag">Hardware</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Placeholder: More projects -->
+                    <!-- Project: Cell Tracking Suite -->
                     <div class="project-card fade-in fade-in-delay-2">
                         <div class="project-card__image-placeholder"
-                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a1a0e);">
-                            🚧
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0e1a1a);">
+                            🎯
                         </div>
                         <div class="project-card__body">
-                            <h3 class="project-card__title">More Coming Soon</h3>
+                            <h3 class="project-card__title">Cell Tracking Suite</h3>
                             <p class="project-card__desc">
-                                Always building something new. Check back soon or visit my GitHub
-                                to see what I'm currently working on.
+                                Dual-color fluorescence microscopy tracker replacing days-to-weeks of manual
+                                annotation with minutes of batch processing. Captures 25–40% more objects via
+                                retrospective trajectory reconstruction, with 70–85% occlusion recovery rate.
                             </p>
                             <div class="project-card__tags">
-                                <span class="tag">Stay Tuned</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">OpenCV</span>
+                                <span class="tag">PyQt5</span>
                             </div>
-                            <div class="project-card__links">
-                                <a href="https://github.com/JohnMinnick" class="project-card__link" target="_blank"
-                                    rel="noopener">My GitHub →</a>
+                        </div>
+                    </div>
+
+                    <!-- Project: BioNets -->
+                    <div class="project-card fade-in">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a100a);">
+                            🔩
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">BioNets</h3>
+                            <p class="project-card__desc">
+                                Novel immobilization system for securing 3D neural samples (brain organoids)
+                                on planar microelectrode arrays. Enables chronic, stable recordings
+                                without disrupting electrode contact. Provisional patent status via UCSC IP Office.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Fabrication</span>
+                                <span class="tag">MEA</span>
+                                <span class="tag">Patent Pending</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: Organoid Morphology Analysis -->
+                    <div class="project-card fade-in fade-in-delay-1">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0a0a2e);">
+                            📊
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">Organoid Morphology Analysis</h3>
+                            <p class="project-card__desc">
+                                21+ day longitudinal morphological tracking across multiple experimental conditions.
+                                Automated extraction of shape factor, solidity, eccentricity, and fractal dimension
+                                with Fourier-descriptor analysis. Published in IEEE EMBC 2025.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">OpenCV</span>
+                                <span class="tag">scikit-image</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: CZI Microscopy Tooling -->
+                    <div class="project-card fade-in fade-in-delay-2">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a0e1a);">
+                            🗂️
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">CZI Microscopy Tooling</h3>
+                            <p class="project-card__desc">
+                                Automated metadata extraction and organization across 1–2 TB of Zeiss microscope
+                                data (200+ CZI files, ~2,200 tiles). Includes MCP server for AI-assisted
+                                microscopy data management via stdio and HTTP transports.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">MCP</span>
+                                <span class="tag">FastAPI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: Agentic RAG Pipeline -->
+                    <div class="project-card fade-in">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #1a1a0e);">
+                            🤖
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">Agentic RAG Pipeline</h3>
+                            <p class="project-card__desc">
+                                Autonomous AI agent for semantic matching against a knowledge base and
+                                dynamic document synthesis. Integrates LLM output directly with LaTeX
+                                compilation for constraint-compliant PDF generation with zero hallucination.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">LLM</span>
+                                <span class="tag">RAG</span>
+                                <span class="tag">LaTeX</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: Flight Dynamics Package -->
+                    <div class="project-card fade-in fade-in-delay-1">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #0e1a0e);">
+                            ✈️
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">Flight Dynamics Package</h3>
+                            <p class="project-card__desc">
+                                Aerodynamics modeling package with 6-DOF dynamics, stability derivatives,
+                                and post-stall lift blending. Includes a PyQt5 Lunar Lander simulator
+                                with live plotting and interactive control.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">PyQt5</span>
+                                <span class="tag">Simulation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: USGS Geophysical Mapping -->
+                    <div class="project-card fade-in fade-in-delay-2">
+                        <div class="project-card__image-placeholder"
+                            style="background: linear-gradient(135deg, var(--color-bg-tertiary), #2e1a0a);">
+                            🌋
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">USGS Volcanic Survey</h3>
+                            <p class="project-card__desc">
+                                Airborne geophysical mapping at Mammoth Lakes, CA and Krafla, Iceland.
+                                Operated multi-sensor UAV payloads for magnetic, thermal, and gas flux
+                                data collection. Data contributed to Icelandic aeronautical chart updates.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">UAV</span>
+                                <span class="tag">Geophysics</span>
+                                <span class="tag">Fieldwork</span>
                             </div>
                         </div>
                     </div>
