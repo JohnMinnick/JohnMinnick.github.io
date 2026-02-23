@@ -80,15 +80,18 @@ function initScrollEffects() {
 }
 
 /**
- * Simple fade-in animation for elements as they scroll into view.
- * Add the class 'fade-in' to any element you want to animate.
+ * Scroll-triggered fade-in animations with stagger support.
+ * Add the class 'fade-in' to any element to animate it on scroll.
+ * Sibling .fade-in elements auto-receive staggered delays (0.1s each).
  */
 function initScrollAnimations() {
+    // Skip if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Unobserve after animation to save resources
                 observer.unobserve(entry.target);
             }
         });
@@ -97,8 +100,20 @@ function initScrollAnimations() {
         rootMargin: '0px 0px -50px 0px'
     });
 
-    // Observe all elements with the fade-in class
+    // Auto-assign stagger delays to sibling .fade-in elements
+    const processed = new Set();
     document.querySelectorAll('.fade-in').forEach(el => {
+        // Find siblings with .fade-in under the same parent
+        const parent = el.parentElement;
+        if (!processed.has(parent)) {
+            processed.add(parent);
+            const siblings = parent.querySelectorAll(':scope > .fade-in');
+            if (siblings.length > 1) {
+                siblings.forEach((sib, i) => {
+                    sib.style.setProperty('--delay', `${i * 0.1}s`);
+                });
+            }
+        }
         observer.observe(el);
     });
 }
@@ -131,6 +146,54 @@ function initPageTransitions() {
         }, 250);
     });
 }
+/**
+ * Dark/light theme toggle.
+ * Persists user preference in localStorage, falls back to OS preference.
+ * Expects a <button class="theme-toggle"> with id="theme-toggle" in the nav.
+ */
+function initThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    const STORAGE_KEY = 'jrm-theme';
+    const html = document.documentElement;
+
+    /**
+     * Apply the given theme and update the toggle icon.
+     * @param {'dark'|'light'} theme
+     */
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        // Sun icon in dark mode (click to go light), moon in light mode
+        btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        btn.setAttribute('aria-label',
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    // Determine initial theme: saved > OS preference > default dark
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        setTheme(saved);
+    } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+    }
+
+    // Toggle on click with spin animation
+    btn.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+
+        // Spin animation
+        btn.classList.add('theme-toggle--spin');
+        btn.addEventListener('animationend', () => {
+            btn.classList.remove('theme-toggle--spin');
+        }, { once: true });
+
+        setTheme(next);
+        localStorage.setItem(STORAGE_KEY, next);
+    });
+}
 
 /* ---- Initialize everything on DOM ready ---- */
 document.addEventListener('DOMContentLoaded', () => {
@@ -139,4 +202,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollEffects();
     initScrollAnimations();
     initPageTransitions();
+    initThemeToggle();
 });

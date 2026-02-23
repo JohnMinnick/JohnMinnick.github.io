@@ -23,7 +23,7 @@
 ## Design System
 
 - **Variables:** `css/variables.css` — full token set (colors, fonts, spacing, breakpoints)
-- **Palette:** Dark neon — near-black bg, cyan/purple/pink accents
+- **Palette:** Dark neon (default) + light theme — toggled via sun/moon button in nav
 - **Typography:** Space Grotesk (headings) + Inter (body) via Google Fonts
 - **Spacing:** 4px base scale as custom properties
 
@@ -48,6 +48,8 @@
 - ✅ Custom 404 page
 - ✅ Pixel art browsing buddy (`js/pet.js`)
 - ✅ Branding: **John R. Minnick / JRM** across all pages
+- ✅ Scroll-triggered fade-in animations with staggered delays
+- ✅ Dark/light theme toggle with localStorage persistence
 
 ---
 
@@ -60,6 +62,7 @@
 
 ## Next Tasks
 
+- Pick items from `docs/rainy-day.md` backlog (blog, interactive resume, more games, etc.)
 - Responsive testing on real mobile devices
 - Lighthouse audit for performance/accessibility scores
 - Add new projects as they're completed
