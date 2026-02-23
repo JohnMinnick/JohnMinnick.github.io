@@ -22,7 +22,7 @@
         '/about.txt': {
             type: 'file',
             content: [
-                "Hey! I'm John Minnick.",
+                "Hey! I'm John R. Minnick.",
                 "",
                 "PhD student at UC Santa Cruz, working in the Braingeneers",
                 "Group at the Genomics Institute. I build neural interface",
@@ -147,7 +147,7 @@
           <div class="terminal__dot terminal__dot--red"></div>
           <div class="terminal__dot terminal__dot--yellow"></div>
           <div class="terminal__dot terminal__dot--green"></div>
-          <span class="terminal__name">jm@portfolio ~ $</span>
+          <span class="terminal__name">jrm@portfolio ~ $</span>
         </div>
         <div class="terminal__body" id="terminal-body"></div>
         <div class="terminal__input-line">
@@ -166,7 +166,7 @@
         // Print welcome message
         printLines([
             '╔══════════════════════════════════════════╗',
-            '║         Welcome to JM Terminal v1.0      ║',
+            '║        Welcome to JRM Terminal v1.0      ║',
             '║    Press ` (backtick) to toggle. Enjoy!  ║',
             '╚══════════════════════════════════════════╝',
             '',
@@ -414,15 +414,15 @@
     /** neofetch command */
     function cmdNeofetch() {
         printLines([
-            '        ╭─────────╮',
-            '        │  JM  ⚡  │      john-minnick@portfolio',
-            '        ╰─────────╯      ────────────────────────',
-            '     ╭──────────────╮    OS:      GitHub Pages',
-            '     │   ██  JM  ██ │    Host:    johnminnick.github.io',
-            '     │   ██████████ │    Kernel:  Vanilla JS (ES6+)',
-            '     │   ██  ══  ██ │    Shell:   JM Terminal v1.0',
-            '     │   ██████████ │    Theme:   Dark Neon',
-            '     ╰──────────────╯    Font:    Space Grotesk + Inter',
+            '        ╭──────────╮',
+            '        │  JRM  ⚡  │     john-r-minnick@portfolio',
+            '        ╰──────────╯     ─────────────────────────',
+            '     ╭───────────────╮   OS:      GitHub Pages',
+            '     │   ██ JRM  ██  │   Host:    johnminnick.github.io',
+            '     │   ███████████ │   Kernel:  Vanilla JS (ES6+)',
+            '     │   ██  ══  ██  │   Shell:   JRM Terminal v1.0',
+            '     │   ███████████ │   Theme:   Dark Neon',
+            '     ╰───────────────╯   Font:    Space Grotesk + Inter',
             '                         Games:   4 built-in',
             '                         Pet:     Pixel art companion',
         ], 'accent');
