@@ -4,53 +4,62 @@
 > Updated by the `/doc-sync` workflow.
 
 **Last Updated:** 2026-02-22
-**Status:** Pre-rebuild — old template still live, agent infrastructure created
+**Status:** ✅ Live — all pages built, tested, and deployed
 
 ---
 
 ## Page Status
 
-| Page | File | Status | Notes |
-| --- | --- | --- | --- |
-| Home / Landing | `index.html` | ❌ Not started | Old template still in place — will be replaced |
-| Projects | `pages/projects.html` | ❌ Not started | Portfolio showcase |
-| Playground | `pages/playground.html` | ❌ Not started | Interactive toys, mini-games hub |
-| About | `pages/about.html` | ❌ Not started | Bio, skills, links |
+| Page | File | Status |
+| --- | --- | --- |
+| Home / Landing | `index.html` | ✅ Complete — hero particles, about, featured projects |
+| Projects | `pages/projects.html` | ✅ Complete — 6 project cards with filters |
+| Playground | `pages/playground.html` | ✅ Complete — 4 game cards linked |
+| About | `pages/about.html` | ✅ Complete — bio, education, skills, highlights |
+| 404 | `404.html` | ✅ Complete — glitch animation, fun facts |
 
 ---
 
 ## Design System
 
-- **Status:** Not yet created
-- **Variables file:** `css/variables.css` (to be created)
-- **Color palette:** TBD — dark mode base with vibrant/fun accents
-- **Typography:** TBD — fun display font + clean sans-serif (Google Fonts)
-- **Spacing scale:** 4px base (to be defined)
+- **Variables:** `css/variables.css` — full token set (colors, fonts, spacing, breakpoints)
+- **Palette:** Dark neon — near-black bg, cyan/purple/pink accents
+- **Typography:** Space Grotesk (headings) + Inter (body) via Google Fonts
+- **Spacing:** 4px base scale as custom properties
 
 ---
 
 ## Games / Interactive Toys
 
-None yet. Ideas to discuss with user:
-- [ ] TBD — ask user what games/toys they'd like
+| Game | Directory | Status |
+| --- | --- | --- |
+| Snake | `games/snake/` | ✅ |
+| Breakout | `games/breakout/` | ✅ |
+| Particle Sandbox | `games/particles/` | ✅ |
+| Game of Life | `games/life/` | ✅ |
+
+---
+
+## Polish Features
+
+- ✅ SVG Favicon (`assets/icons/favicon.svg`) — JRM gradient
+- ✅ Page transitions — fade in/out via `global.css` + `main.js`
+- ✅ Terminal easter egg — backtick-activated CRT overlay (`js/terminal.js`)
+- ✅ Custom 404 page
+- ✅ Pixel art browsing buddy (`js/pet.js`)
+- ✅ Branding: **John R. Minnick / JRM** across all pages
 
 ---
 
 ## Known Issues / TODOs
 
-- Old HTML5 UP template files need to be cleaned out before building
-- No `.gitignore` exists — need to create one
-- No favicon — need to create one
-- README.md is a one-liner — needs rewriting
+- See `docs/rainy-day.md` for backlog items
+- Open Graph images not yet generated (text meta tags are in place)
 
 ---
 
 ## Next Tasks
 
-1. **Clean out old template** — remove all Halcyonic files, images, and assets
-2. **Create design system** — `css/variables.css`, `css/reset.css`, `css/global.css`
-3. **Build landing page** — hero section, nav, overall layout
-4. **Build projects page** — card grid with real project data
-5. **Build playground page** — interactive section with mini-games
-6. **Add first game/toy** — something fun to showcase skills
-7. **Build about page** — bio, skills, contact links
+- Responsive testing on real mobile devices
+- Lighthouse audit for performance/accessibility scores
+- Add new projects as they're completed
