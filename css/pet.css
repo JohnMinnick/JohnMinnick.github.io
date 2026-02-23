@@ -1,0 +1,258 @@
+/* ============================================================
+   pet.css — Browsing Pet System
+   Selection modal and cursor-following companion styles.
+   ============================================================ */
+
+/* ---- Selection Modal Overlay ---- */
+.pet-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: petModalFadeIn 0.5s ease forwards;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+@keyframes petModalFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Closing animation */
+.pet-modal-overlay--closing {
+    animation: petModalFadeOut 0.4s ease forwards;
+}
+
+@keyframes petModalFadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* ---- Modal Card ---- */
+.pet-modal {
+    background: var(--color-bg-secondary, #161929);
+    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+    border-radius: 20px;
+    padding: 2.5rem 2rem 2rem;
+    max-width: 520px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.9) translateY(20px);
+    animation: petModalSlideIn 0.5s ease 0.1s forwards;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(0, 255, 247, 0.08);
+}
+
+@keyframes petModalSlideIn {
+    to {
+        transform: scale(1) translateY(0);
+    }
+}
+
+.pet-modal__title {
+    font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    /* Gradient text like the hero title */
+    background: linear-gradient(135deg, #00fff7, #ff00aa, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pet-modal__subtitle {
+    color: var(--color-text-secondary, #8a8fa8);
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+}
+
+/* ---- Pet Selection Grid ---- */
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Individual pet choice button */
+.pet-choice {
+    background: var(--color-bg-tertiary, #1a1d2e);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pet-choice:hover {
+    border-color: var(--color-accent-primary, #00fff7);
+    background: rgba(0, 255, 247, 0.05);
+    transform: translateY(-3px);
+}
+
+.pet-choice--selected {
+    border-color: var(--color-accent-primary, #00fff7);
+    background: rgba(0, 255, 247, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 247, 0.15);
+}
+
+/* The pet emoji/sprite */
+.pet-choice__sprite {
+    font-size: 2.2rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.pet-choice:hover .pet-choice__sprite {
+    transform: scale(1.2);
+}
+
+/* Pet name label */
+.pet-choice__name {
+    font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #e6e8f0);
+    letter-spacing: 0.03em;
+}
+
+/* ---- Confirm Button ---- */
+.pet-modal__confirm {
+    background: linear-gradient(135deg, #00fff7, #0af);
+    color: #0a0c1a;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.pet-modal__confirm--active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pet-modal__confirm--active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 255, 247, 0.3);
+}
+
+/* ---- The Cursor-Following Pet ---- */
+.browsing-pet {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    font-size: 2rem;
+    line-height: 1;
+    transition: none;
+    /* Movement handled by JS for smooth interpolation */
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    user-select: none;
+}
+
+/* Trotting/bobbing animation while the pet moves */
+.browsing-pet--moving {
+    animation: petTrot 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes petTrot {
+    0% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    100% {
+        transform: translateY(-6px) rotate(3deg);
+    }
+}
+
+/* Idle breathing animation when stationary */
+.browsing-pet--idle {
+    animation: petIdle 2s ease-in-out infinite;
+}
+
+@keyframes petIdle {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-3px) scale(1.05);
+    }
+}
+
+/* ---- Change Pet Button (small, bottom-left) ---- */
+.pet-change-btn {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 9998;
+    background: var(--color-bg-secondary, #161929);
+    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.4;
+    transition: all 0.25s ease;
+}
+
+.pet-change-btn:hover {
+    opacity: 1;
+    border-color: var(--color-accent-primary, #00fff7);
+    transform: scale(1.1);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+    .pet-modal {
+        padding: 1.5rem 1rem;
+    }
+
+    .pet-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    .pet-choice__sprite {
+        font-size: 1.8rem;
+    }
+}
+
+/* ---- Reduced Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+
+    .browsing-pet--moving,
+    .browsing-pet--idle {
+        animation: none;
+    }
+
+    .pet-modal-overlay,
+    .pet-modal {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
