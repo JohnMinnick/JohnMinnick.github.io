@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake — John Minnick's Playground</title>
+    <meta name="description" content="Classic Snake game with a neon twist. Built with vanilla JS and Canvas.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="snake.css">
+</head>
+
+<body>
+
+    <!-- ============================================================
+       Game Container
+       ============================================================ -->
+    <div class="game-wrapper">
+
+        <!-- Header -->
+        <div class="game-header">
+            <a href="../../pages/playground.html" class="back-link">← Playground</a>
+            <h1 class="game-title">🐍 Snake</h1>
+        </div>
+
+        <!-- Score Bar -->
+        <div class="score-bar">
+            <div class="score-item">
+                <span class="score-label">Score</span>
+                <span class="score-value" id="score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">High Score</span>
+                <span class="score-value" id="high-score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Speed</span>
+                <span class="score-value" id="speed-display">1</span>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <canvas id="game-canvas" width="400" height="400"></canvas>
+
+        <!-- Overlay (start / game over) -->
+        <div class="game-overlay" id="overlay">
+            <div class="overlay-content">
+                <h2 class="overlay-title" id="overlay-title">🐍 Snake</h2>
+                <p class="overlay-text" id="overlay-text">Use arrow keys or WASD to move</p>
+                <button class="play-btn" id="play-btn">Play</button>
+            </div>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <button class="ctrl-btn" data-dir="up">▲</button>
+            <div class="ctrl-row">
+                <button class="ctrl-btn" data-dir="left">◀</button>
+                <button class="ctrl-btn" data-dir="down">▼</button>
+                <button class="ctrl-btn" data-dir="right">▶</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="game-footer">Arrow keys / WASD · Eat food · Don't hit walls or yourself</p>
+    </div>
+
+    <script src="snake.js"></script>
+</body>
+
+</html>

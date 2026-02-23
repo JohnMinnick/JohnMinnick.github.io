@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Life — John Minnick's Playground</title>
+    <meta name="description"
+        content="Conway's Game of Life cellular automaton. Click to place cells and watch patterns evolve.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+       Game of Life — Inline Styles (self-contained)
+       ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c1a;
+            color: #e6e8f0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .game-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 500px;
+        }
+
+        .back-link {
+            color: #8a8fa8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #00fff7;
+        }
+
+        .game-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00fff7, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            width: 500px;
+            justify-content: center;
+        }
+
+        .ctrl-btn {
+            background: #161929;
+            border: 1px solid rgba(0, 255, 247, 0.15);
+            border-radius: 6px;
+            padding: 0.35rem 0.9rem;
+            color: #e6e8f0;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .ctrl-btn:hover {
+            border-color: #00fff7;
+            background: rgba(0, 255, 247, 0.05);
+        }
+
+        .ctrl-btn.active {
+            border-color: #00fff7;
+            background: rgba(0, 255, 247, 0.1);
+            color: #00fff7;
+        }
+
+        .stat {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #00fff7;
+            font-size: 0.8rem;
+        }
+
+        #grid {
+            border: 2px solid rgba(0, 255, 247, 0.15);
+            border-radius: 8px;
+            background: #0f1225;
+            cursor: crosshair;
+            box-shadow: 0 0 30px rgba(0, 255, 247, 0.05);
+            image-rendering: pixelated;
+        }
+
+        .game-footer {
+            color: #555;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .ctrl-group {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .ctrl-label {
+            font-size: 0.7rem;
+            color: #8a8fa8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ctrl-slider {
+            -webkit-appearance: none;
+            width: 70px;
+            height: 4px;
+            border-radius: 2px;
+            background: #1a1d2e;
+            outline: none;
+        }
+
+        .ctrl-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #00fff7;
+            cursor: pointer;
+        }
+
+        @media (max-width: 520px) {
+            #grid {
+                width: 320px;
+                height: 320px;
+            }
+
+            .game-header,
+            .controls {
+                width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-wrapper">
+        <div class="game-header">
+            <a href="../../pages/playground.html" class="back-link">← Playground</a>
+            <h1 class="game-title">🧬 Game of Life</h1>
+        </div>
+        <div class="controls">
+            <button class="ctrl-btn" id="play-btn">▶ Play</button>
+            <button class="ctrl-btn" id="step-btn">⏭ Step</button>
+            <button class="ctrl-btn" id="clear-btn">Clear</button>
+            <button class="ctrl-btn" id="random-btn">🎲 Random</button>
+            <button class="ctrl-btn" id="glider-btn">Glider Gun</button>
+            <div class="ctrl-group">
+                <span class="ctrl-label">Speed</span>
+                <input type="range" class="ctrl-slider" id="speed" min="1" max="30" value="10">
+            </div>
+            <span class="stat" id="gen">Gen: 0</span>
+        </div>
+        <canvas id="grid" width="500" height="500"></canvas>
+        <p class="game-footer">Click to place/remove cells · Press Play to simulate</p>
+    </div>
+    <script src="life.js"></script>
+</body>
+
+</html>

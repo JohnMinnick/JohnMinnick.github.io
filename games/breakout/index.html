@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout — John Minnick's Playground</title>
+    <meta name="description"
+        content="Classic Breakout game with neon bricks and smooth physics. Built with vanilla JS and Canvas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="breakout.css">
+</head>
+
+<body>
+    <div class="game-wrapper">
+        <div class="game-header">
+            <a href="../../pages/playground.html" class="back-link">← Playground</a>
+            <h1 class="game-title">🧱 Breakout</h1>
+        </div>
+        <div class="score-bar">
+            <div class="score-item">
+                <span class="score-label">Score</span>
+                <span class="score-value" id="score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Lives</span>
+                <span class="score-value" id="lives">3</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Level</span>
+                <span class="score-value" id="level">1</span>
+            </div>
+        </div>
+        <canvas id="game-canvas" width="480" height="400"></canvas>
+        <div class="game-overlay" id="overlay">
+            <div class="overlay-content">
+                <h2 class="overlay-title" id="overlay-title">🧱 Breakout</h2>
+                <p class="overlay-text" id="overlay-text">Move paddle with mouse or arrow keys</p>
+                <button class="play-btn" id="play-btn">Play</button>
+            </div>
+        </div>
+        <p class="game-footer">Mouse / Arrow keys / Touch to move paddle</p>
+    </div>
+    <script src="breakout.js"></script>
+</body>
+
+</html>

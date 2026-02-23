@@ -1,0 +1,214 @@
+/* ============================================================
+   snake.css — Snake Game Styles
+   Dark neon theme matching the portfolio aesthetic.
+   ============================================================ */
+
+/* ---- Reset & Base ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0c1a;
+    color: #e6e8f0;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* ---- Game Wrapper ---- */
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+/* ---- Header ---- */
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 400px;
+}
+
+.back-link {
+    color: #8a8fa8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #00fff7;
+}
+
+.game-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00fff7, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ---- Score Bar ---- */
+.score-bar {
+    display: flex;
+    gap: 1.5rem;
+    width: 400px;
+    justify-content: center;
+}
+
+.score-item {
+    text-align: center;
+}
+
+.score-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8fa8;
+}
+
+.score-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00fff7;
+}
+
+/* ---- Canvas ---- */
+#game-canvas {
+    border: 2px solid rgba(0, 255, 247, 0.2);
+    border-radius: 8px;
+    background: #0f1225;
+    box-shadow: 0 0 30px rgba(0, 255, 247, 0.05);
+    image-rendering: pixelated;
+}
+
+/* ---- Overlay ---- */
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 12, 26, 0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    z-index: 10;
+    transition: opacity 0.3s;
+}
+
+.game-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-content {
+    text-align: center;
+}
+
+.overlay-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.overlay-text {
+    color: #8a8fa8;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.play-btn {
+    background: linear-gradient(135deg, #00fff7, #0af);
+    color: #0a0c1a;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 255, 247, 0.3);
+}
+
+/* ---- Mobile Controls ---- */
+.mobile-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.ctrl-row {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.ctrl-btn {
+    width: 56px;
+    height: 56px;
+    background: #161929;
+    border: 1px solid rgba(0, 255, 247, 0.15);
+    border-radius: 10px;
+    color: #e6e8f0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ctrl-btn:active {
+    background: rgba(0, 255, 247, 0.15);
+}
+
+/* ---- Footer ---- */
+.game-footer {
+    color: #555;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+    #game-canvas {
+        width: 320px;
+        height: 320px;
+    }
+
+    .game-header,
+    .score-bar {
+        width: 320px;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+}
+
+@media (pointer: coarse) {
+    .mobile-controls {
+        display: flex;
+    }
+}
