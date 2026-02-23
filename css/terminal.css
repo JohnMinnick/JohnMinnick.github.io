@@ -1,0 +1,194 @@
+/* ============================================================
+   terminal.css — Hidden Terminal Easter Egg
+   Activated via backtick (`) key. Retro CRT-style terminal
+   overlay with interactive commands.
+   ============================================================ */
+
+/* ---- Terminal Overlay ---- */
+.terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.terminal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ---- Terminal Window ---- */
+.terminal {
+    width: min(700px, 90vw);
+    height: min(450px, 70vh);
+    background: #0c0c0c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+        0 0 40px rgba(0, 255, 247, 0.08),
+        inset 0 0 80px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    /* CRT scanline effect */
+    background-image:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 247, 0.015) 2px,
+            rgba(0, 255, 247, 0.015) 4px);
+}
+
+/* ---- Title Bar ---- */
+.terminal__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+/* Fake traffic light dots */
+.terminal__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal__dot--red {
+    background: #ff5f56;
+}
+
+.terminal__dot--yellow {
+    background: #ffbd2e;
+}
+
+.terminal__dot--green {
+    background: #27c93f;
+}
+
+.terminal__name {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    margin-left: auto;
+}
+
+/* ---- Terminal Body ---- */
+.terminal__body {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #00fff7;
+}
+
+/* Scrollbar styling */
+.terminal__body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.terminal__body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.terminal__body::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}
+
+/* Output lines */
+.terminal__line {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.terminal__line--system {
+    color: #888;
+}
+
+.terminal__line--error {
+    color: #ff5f56;
+}
+
+.terminal__line--success {
+    color: #27c93f;
+}
+
+.terminal__line--accent {
+    color: #7c3aed;
+}
+
+.terminal__line--highlight {
+    color: #ffe066;
+}
+
+/* ---- Input Line ---- */
+.terminal__input-line {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+}
+
+.terminal__prompt {
+    color: #27c93f;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+}
+
+.terminal__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #00fff7;
+    font-family: inherit;
+    font-size: inherit;
+    caret-color: #00fff7;
+}
+
+/* Blinking cursor effect */
+.terminal__input::placeholder {
+    color: #333;
+}
+
+/* ---- Hint text ---- */
+.terminal-hint {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 19999;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: #333;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.terminal-hint:hover {
+    color: #555;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+    .terminal {
+        width: 95vw;
+        height: 80vh;
+        border-radius: 6px;
+    }
+
+    .terminal__body {
+        font-size: 0.75rem;
+    }
+}

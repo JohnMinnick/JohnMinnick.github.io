@@ -103,10 +103,40 @@ function initScrollAnimations() {
     });
 }
 
+/**
+ * Smooth page transitions — fade out before navigating to a new page.
+ * Intercepts clicks on internal links and plays a brief exit animation.
+ */
+function initPageTransitions() {
+    // Skip if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        // Skip external links, hash-only links, new-tab links, and mailto
+        if (href.startsWith('http') || href.startsWith('#') ||
+            href.startsWith('mailto:') || link.target === '_blank') return;
+
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+
+        // Navigate after the exit animation completes
+        setTimeout(() => {
+            window.location.href = href;
+        }, 250);
+    });
+}
+
 /* ---- Initialize everything on DOM ready ---- */
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     highlightActiveNavLink();
     initScrollEffects();
     initScrollAnimations();
+    initPageTransitions();
 });

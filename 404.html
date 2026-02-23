@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>404 — Page Not Found | John Minnick</title>
+    <meta name="description" content="This page doesn't exist, but hey, at least there's a game.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ============================================================
+       404 Page — Self-contained dark neon theme
+       ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c1a;
+            color: #e6e8f0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating background particles — purely decorative */
+        .bg-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Main content */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Giant 404 number */
+        .error-code {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(6rem, 20vw, 12rem);
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, #00fff7, #7c3aed, #ff00aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glitch 3s ease-in-out infinite;
+            user-select: none;
+        }
+
+        /* Glitch animation on the 404 */
+        @keyframes glitch {
+
+            0%,
+            90%,
+            100% {
+                transform: none;
+                opacity: 1;
+            }
+
+            91% {
+                transform: translate(-3px, 2px) skewX(-1deg);
+                opacity: 0.8;
+            }
+
+            93% {
+                transform: translate(3px, -1px) skewX(1deg);
+                opacity: 0.9;
+            }
+
+            95% {
+                transform: translate(-2px, 1px);
+                opacity: 0.85;
+            }
+
+            97% {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        .subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0.5rem 0 0.75rem;
+            color: #c0c4d8;
+        }
+
+        .desc {
+            color: #8a8fa8;
+            font-size: 0.95rem;
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Action buttons */
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn--primary {
+            background: linear-gradient(135deg, #00fff7, #0af);
+            color: #0a0c1a;
+            border: none;
+        }
+
+        .btn--primary:hover {
+            box-shadow: 0 8px 20px rgba(0, 255, 247, 0.3);
+        }
+
+        .btn--secondary {
+            background: transparent;
+            color: #e6e8f0;
+            border: 1px solid rgba(0, 255, 247, 0.3);
+        }
+
+        .btn--secondary:hover {
+            border-color: #00fff7;
+            box-shadow: 0 8px 20px rgba(0, 255, 247, 0.1);
+        }
+
+        /* Fun fact that changes on each visit */
+        .fun-fact {
+            margin-top: 3rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 8px;
+            background: rgba(124, 58, 237, 0.05);
+            max-width: 400px;
+        }
+
+        .fun-fact__label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #7c3aed;
+            margin-bottom: 0.3rem;
+        }
+
+        .fun-fact__text {
+            font-size: 0.85rem;
+            color: #c0c4d8;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (prefers-reduced-motion: reduce) {
+            .error-code {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Decorative background -->
+    <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="error-code">404</div>
+        <p class="subtitle">Page Not Found</p>
+        <p class="desc">
+            You've wandered into the void. This page doesn't exist —
+            but the rest of the site does!
+        </p>
+
+        <div class="actions">
+            <a href="index.html" class="btn btn--primary">← Go Home</a>
+            <a href="pages/playground.html" class="btn btn--secondary">🕹️ Play a Game</a>
+        </div>
+
+        <!-- Random fun fact -->
+        <div class="fun-fact">
+            <p class="fun-fact__label">Random Fact ✨</p>
+            <p class="fun-fact__text" id="fun-fact"></p>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * 404 Page Scripts
+         * - Background floating particles
+         * - Random fun fact on each load
+         */
+
+        /* ---- Fun Facts ---- */
+        const facts = [
+            "The first computer bug was an actual moth stuck in a relay.",
+            "There are more possible chess games than atoms in the observable universe.",
+            "Python is named after Monty Python, not the snake.",
+            "The first website ever is still online: info.cern.ch.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "The average person blinks 15-20 times per minute while reading this.",
+            "HTTP 404 was named after a room at CERN — Room 404 — where the web was born.",
+            "Honey never spoils. Archaeologists found 3000-year-old edible honey in Egyptian tombs.",
+            "Octopi have three hearts and blue blood.",
+            "The inventor of the Pringles can is buried in one.",
+        ];
+        document.getElementById('fun-fact').textContent =
+            facts[Math.floor(Math.random() * facts.length)];
+
+        /* ---- Background Particles ---- */
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Create drifting particles
+        const particles = Array.from({ length: 40 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: 1 + Math.random() * 2,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            color: ['#00fff7', '#7c3aed', '#ff00aa'][Math.floor(Math.random() * 3)],
+            alpha: 0.2 + Math.random() * 0.3
+        }));
+
+        /** Animate the background particles */
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Wrap around edges
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(animate);
+        }
+
+        // Respect reduced motion
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            animate();
+        }
+    </script>
+</body>
+
+</html>

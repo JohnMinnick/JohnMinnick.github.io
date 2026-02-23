@@ -354,3 +354,44 @@ a:hover {
         padding: 0 var(--space-md);
     }
 }
+
+/* ---- Page Transitions ---- */
+/* Fade in when page loads, fade out before navigating */
+body {
+    animation: pageIn 0.4s ease both;
+}
+
+body.page-leaving {
+    animation: pageOut 0.25s ease both;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    body,
+    body.page-leaving {
+        animation: none;
+    }
+}
