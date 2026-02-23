@@ -1,160 +1,324 @@
 /**
- * pet.js — Browsing Pet System
+ * pet.js — Browsing Pet System (Canvas Pixel Art Edition)
  *
  * Shows a "Choose Your Browsing Buddy" modal on first visit.
- * The selected pet follows the cursor across all pages with a
- * trotting animation. Choice persists in localStorage.
- *
- * Included on every page via <script src="js/pet.js"></script>.
+ * Pets are drawn as pixel art on a small canvas element that
+ * follows the cursor with smooth lerp interpolation.
  */
 
+const PET_STORAGE_KEY = 'browsing-pet-id';
+
 /* ============================================================
-   Pet Definitions
-   Each pet has an emoji sprite, a name, and a fun description.
+   Pet Pixel Art Definitions
+   Each pet has frames defined as arrays of [x, y, color] pixels.
+   Canvas is 16x16 scaled up 3x = 48x48 display size.
+   ============================================================ */
+const SCALE = 3;
+const SPRITE_SIZE = 16;
+
+/**
+ * Builds pixel art frames for each pet.
+ * Returns object mapping pet id -> array of frame data.
+ * Each frame is an array of {x, y, color} objects.
+ */
+function buildPetFrames() {
+    // Color palettes per pet
+    const C = {
+        cat: { body: '#f4a460', dark: '#cd853f', eye: '#2e8b57', nose: '#ff6b81', ear: '#cd853f' },
+        dog: { body: '#c4a882', dark: '#a08060', eye: '#4a3728', nose: '#333', ear: '#a08060' },
+        duck: { body: '#ffe066', dark: '#f0c040', eye: '#222', beak: '#ff8c00', feet: '#ff8c00' },
+        fox: { body: '#e8601c', dark: '#c04010', eye: '#222', nose: '#222', tip: '#fff' },
+        penguin: { body: '#222', belly: '#fff', eye: '#fff', beak: '#ff8c00', feet: '#ff8c00' },
+        dragon: { body: '#6b5b95', dark: '#4a3f6b', eye: '#ff4444', wing: '#8b7bb5', fire: '#ff6b35' }
+    };
+
+    /** Helper: fill a rect of pixels */
+    function rect(px, x, y, w, h, color) {
+        for (let dy = 0; dy < h; dy++)
+            for (let dx = 0; dx < w; dx++)
+                px.push({ x: x + dx, y: y + dy, c: color });
+    }
+
+    /** Helper: set single pixel */
+    function dot(px, x, y, color) { px.push({ x, y, c: color }); }
+
+    // --- CAT (2 frames) ---
+    function catFrame(legOffset) {
+        const p = [], c = C.cat;
+        // Ears
+        dot(p, 4, 2, c.ear); dot(p, 5, 1, c.ear); dot(p, 9, 1, c.ear); dot(p, 10, 2, c.ear);
+        // Head
+        rect(p, 4, 3, 7, 5, c.body);
+        // Eyes
+        dot(p, 6, 5, c.eye); dot(p, 9, 5, c.eye);
+        // Nose
+        dot(p, 7, 6, c.nose); dot(p, 8, 6, c.nose);
+        // Body
+        rect(p, 3, 8, 9, 4, c.body);
+        rect(p, 4, 8, 7, 4, c.dark);
+        rect(p, 3, 8, 9, 3, c.body);
+        // Tail
+        dot(p, 12, 7, c.body); dot(p, 13, 6, c.body); dot(p, 14, 5, c.body);
+        // Legs (animated)
+        rect(p, 4, 12, 2, 2 + legOffset, c.dark);
+        rect(p, 9, 12, 2, 2 + (1 - legOffset), c.dark);
+        return p;
+    }
+
+    // --- DOG (2 frames) ---
+    function dogFrame(legOffset) {
+        const p = [], c = C.dog;
+        // Ears (floppy)
+        rect(p, 3, 3, 2, 3, c.ear); rect(p, 10, 3, 2, 3, c.ear);
+        // Head
+        rect(p, 4, 2, 7, 5, c.body);
+        // Eyes
+        dot(p, 6, 4, c.eye); dot(p, 9, 4, c.eye);
+        // Nose/snout
+        rect(p, 6, 5, 3, 2, c.dark); dot(p, 7, 5, c.nose);
+        // Body
+        rect(p, 3, 7, 9, 5, c.body);
+        // Tail (wagging offset)
+        dot(p, 12, 6 + legOffset, c.dark); dot(p, 13, 5 + legOffset, c.dark);
+        // Legs
+        rect(p, 4, 12, 2, 2 + legOffset, c.dark);
+        rect(p, 9, 12, 2, 2 + (1 - legOffset), c.dark);
+        return p;
+    }
+
+    // --- DUCK (2 frames) ---
+    function duckFrame(legOffset) {
+        const p = [], c = C.duck;
+        // Head
+        rect(p, 5, 2, 5, 4, c.body);
+        // Eye
+        dot(p, 8, 3, c.eye);
+        // Beak
+        rect(p, 10, 4, 3, 2, c.beak);
+        // Body
+        rect(p, 3, 6, 8, 5, c.body);
+        rect(p, 4, 6, 6, 5, c.dark);
+        rect(p, 3, 6, 8, 4, c.body);
+        // Wing
+        rect(p, 4, 7, 4, 3, c.dark);
+        // Feet
+        rect(p, 5, 11, 2, 1 + legOffset, c.feet);
+        rect(p, 8, 11, 2, 1 + (1 - legOffset), c.feet);
+        return p;
+    }
+
+    // --- FOX (2 frames) ---
+    function foxFrame(legOffset) {
+        const p = [], c = C.fox;
+        // Ears
+        dot(p, 4, 1, c.body); dot(p, 5, 0, c.body);
+        dot(p, 9, 0, c.body); dot(p, 10, 1, c.body);
+        // Head
+        rect(p, 4, 2, 7, 5, c.body);
+        // White muzzle
+        rect(p, 6, 5, 3, 2, c.tip);
+        // Eyes & nose
+        dot(p, 6, 4, c.eye); dot(p, 9, 4, c.eye);
+        dot(p, 7, 5, c.nose);
+        // Body
+        rect(p, 3, 7, 9, 5, c.body);
+        rect(p, 5, 9, 5, 3, c.dark);
+        // Tail (bushy)
+        dot(p, 12, 8, c.body); dot(p, 13, 7, c.body);
+        dot(p, 14, 6, c.body); dot(p, 14, 7, c.tip);
+        // Legs
+        rect(p, 4, 12, 2, 2 + legOffset, c.dark);
+        rect(p, 9, 12, 2, 2 + (1 - legOffset), c.dark);
+        return p;
+    }
+
+    // --- PENGUIN (2 frames) ---
+    function penguinFrame(legOffset) {
+        const p = [], c = C.penguin;
+        // Head
+        rect(p, 5, 1, 5, 4, c.body);
+        // Eyes
+        dot(p, 6, 3, c.eye); dot(p, 8, 3, c.eye);
+        // Beak
+        dot(p, 7, 4, c.beak);
+        // Body
+        rect(p, 4, 5, 7, 6, c.body);
+        // Belly
+        rect(p, 5, 6, 5, 4, c.belly);
+        // Wings/flippers
+        dot(p, 3, 6, c.body); dot(p, 3, 7, c.body);
+        dot(p, 11, 6, c.body); dot(p, 11, 7, c.body);
+        // Feet
+        rect(p, 5, 11, 2, 1 + legOffset, c.feet);
+        rect(p, 8, 11, 2, 1 + (1 - legOffset), c.feet);
+        return p;
+    }
+
+    // --- DRAGON (2 frames) ---
+    function dragonFrame(legOffset) {
+        const p = [], c = C.dragon;
+        // Horns
+        dot(p, 5, 0, c.dark); dot(p, 9, 0, c.dark);
+        // Head
+        rect(p, 4, 1, 7, 5, c.body);
+        // Eyes
+        dot(p, 6, 3, c.eye); dot(p, 9, 3, c.eye);
+        // Nostrils — little fire puff on frame 1
+        dot(p, 10, 4, c.fire);
+        // Body
+        rect(p, 3, 6, 9, 5, c.body);
+        // Spine ridge
+        dot(p, 7, 6, c.dark); dot(p, 8, 6, c.dark);
+        // Wing
+        rect(p, 11, 4, 2, 4, c.wing); dot(p, 13, 3 + legOffset, c.wing);
+        // Tail
+        dot(p, 2, 9, c.body); dot(p, 1, 10, c.body); dot(p, 0, 10, c.dark);
+        // Legs
+        rect(p, 4, 11, 2, 2 + legOffset, c.dark);
+        rect(p, 9, 11, 2, 2 + (1 - legOffset), c.dark);
+        return p;
+    }
+
+    return {
+        cat: [catFrame(0), catFrame(1)],
+        dog: [dogFrame(0), dogFrame(1)],
+        duck: [duckFrame(0), duckFrame(1)],
+        fox: [foxFrame(0), foxFrame(1)],
+        penguin: [penguinFrame(0), penguinFrame(1)],
+        dragon: [dragonFrame(0), dragonFrame(1)]
+    };
+}
+
+/* ============================================================
+   Pet Definitions (metadata for the selection modal)
    ============================================================ */
 const PETS = [
-    { id: 'cat', sprite: '🐱', name: 'Cat', desc: 'Aloof but loyal' },
-    { id: 'dog', sprite: '🐶', name: 'Dog', desc: 'Best friend vibes' },
-    { id: 'duck', sprite: '🦆', name: 'Duck', desc: 'Chaotic energy' },
-    { id: 'fox', sprite: '🦊', name: 'Fox', desc: 'Sly and curious' },
-    { id: 'penguin', sprite: '🐧', name: 'Penguin', desc: 'Chill companion' },
-    { id: 'dragon', sprite: '🐉', name: 'Dragon', desc: 'Mythical vibes' },
+    { id: 'cat', name: 'Cat', desc: 'Aloof but loyal' },
+    { id: 'dog', name: 'Dog', desc: 'Best friend vibes' },
+    { id: 'duck', name: 'Duck', desc: 'Chaotic energy' },
+    { id: 'fox', name: 'Fox', desc: 'Sly and curious' },
+    { id: 'penguin', name: 'Penguin', desc: 'Chill companion' },
+    { id: 'dragon', name: 'Dragon', desc: 'Mythical vibes' },
 ];
-
-/** localStorage key for persisting the chosen pet */
-const PET_STORAGE_KEY = 'browsing-pet-id';
 
 /* ============================================================
    State
    ============================================================ */
-let activePet = null;       // Currently selected pet object
-let petElement = null;      // DOM element for the on-screen pet
-let petX = 0, petY = 0;     // Current pet position
-let targetX = 0, targetY = 0; // Mouse / target position
-let isMoving = false;        // Whether the pet is currently trotting
-let idleTimeout = null;      // Timer to switch to idle state
-let animFrameId = null;      // requestAnimationFrame ID
+let activePet = null;
+let petCanvas = null;
+let petCtx = null;
+let petFrames = null;
+let allFrames = null;
+let petX = 0, petY = 0;
+let targetX = 0, targetY = 0;
+let isMoving = false;
+let idleTimeout = null;
+let animFrameId = null;
+let frameIndex = 0;
+let frameTick = 0;
 
 /* ============================================================
    Initialization
-   Runs on DOMContentLoaded. Checks localStorage for a saved
-   pet, otherwise shows the selection modal.
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
+    allFrames = buildPetFrames();
     const savedPetId = localStorage.getItem(PET_STORAGE_KEY);
 
-    if (savedPetId) {
-        // Returning visitor — spawn their saved pet immediately
-        const pet = PETS.find(p => p.id === savedPetId);
-        if (pet) {
-            spawnPet(pet);
-            createChangePetButton();
-            return;
-        }
+    if (savedPetId && allFrames[savedPetId]) {
+        spawnPet(savedPetId);
+        createChangePetButton();
+    } else {
+        showSelectionModal();
     }
-
-    // First visit — show selection modal
-    showSelectionModal();
 });
+
+/* ============================================================
+   Render a pet frame onto a canvas for the modal preview
+   ============================================================ */
+function renderPreviewCanvas(petId) {
+    const PREVIEW_SCALE = 4;
+    const canvas = document.createElement('canvas');
+    canvas.width = SPRITE_SIZE * PREVIEW_SCALE;
+    canvas.height = SPRITE_SIZE * PREVIEW_SCALE;
+    canvas.style.width = (SPRITE_SIZE * PREVIEW_SCALE) + 'px';
+    canvas.style.height = (SPRITE_SIZE * PREVIEW_SCALE) + 'px';
+    canvas.style.imageRendering = 'pixelated';
+    const ctx = canvas.getContext('2d');
+    const frame = allFrames[petId][0];
+    frame.forEach(px => {
+        ctx.fillStyle = px.c;
+        ctx.fillRect(px.x * PREVIEW_SCALE, px.y * PREVIEW_SCALE, PREVIEW_SCALE, PREVIEW_SCALE);
+    });
+    return canvas;
+}
 
 /* ============================================================
    Selection Modal
    ============================================================ */
-
-/**
- * Creates and displays the pet selection modal overlay.
- */
 function showSelectionModal() {
     let selectedId = null;
 
-    // --- Overlay ---
     const overlay = document.createElement('div');
     overlay.className = 'pet-modal-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-label', 'Choose your browsing buddy');
 
-    // --- Modal Card ---
     const modal = document.createElement('div');
     modal.className = 'pet-modal';
 
-    // Title
     const title = document.createElement('h2');
     title.className = 'pet-modal__title';
     title.textContent = '✨ Choose Your Browsing Buddy';
     modal.appendChild(title);
 
-    // Subtitle
     const subtitle = document.createElement('p');
     subtitle.className = 'pet-modal__subtitle';
-    subtitle.textContent = 'Pick a companion — they\'ll follow you around the site!';
+    subtitle.textContent = "Pick a companion — they'll follow you around the site!";
     modal.appendChild(subtitle);
 
-    // --- Pet Grid ---
     const grid = document.createElement('div');
     grid.className = 'pet-grid';
 
     PETS.forEach(pet => {
         const btn = document.createElement('button');
         btn.className = 'pet-choice';
-        btn.setAttribute('aria-label', `Select ${pet.name}`);
+        btn.setAttribute('aria-label', 'Select ' + pet.name);
         btn.dataset.petId = pet.id;
 
-        // Emoji sprite
-        const sprite = document.createElement('span');
-        sprite.className = 'pet-choice__sprite';
-        sprite.textContent = pet.sprite;
-        btn.appendChild(sprite);
+        // Pixel art preview canvas instead of emoji
+        const previewCanvas = renderPreviewCanvas(pet.id);
+        previewCanvas.className = 'pet-choice__sprite';
+        btn.appendChild(previewCanvas);
 
-        // Pet name
         const name = document.createElement('span');
         name.className = 'pet-choice__name';
         name.textContent = pet.name;
         btn.appendChild(name);
 
-        // Click handler — select this pet
         btn.addEventListener('click', () => {
-            // Deselect all, then select this one
-            grid.querySelectorAll('.pet-choice').forEach(b => {
-                b.classList.remove('pet-choice--selected');
-            });
+            grid.querySelectorAll('.pet-choice').forEach(b => b.classList.remove('pet-choice--selected'));
             btn.classList.add('pet-choice--selected');
             selectedId = pet.id;
-
-            // Enable the confirm button
             confirmBtn.classList.add('pet-modal__confirm--active');
         });
 
         grid.appendChild(btn);
     });
-
     modal.appendChild(grid);
 
-    // --- Confirm Button ---
     const confirmBtn = document.createElement('button');
     confirmBtn.className = 'pet-modal__confirm';
-    confirmBtn.textContent = 'Let\'s Go! 🚀';
-
+    confirmBtn.textContent = "Let's Go! 🚀";
     confirmBtn.addEventListener('click', () => {
         if (!selectedId) return;
-
-        // Save choice
         localStorage.setItem(PET_STORAGE_KEY, selectedId);
-
-        // Close modal with animation
         overlay.classList.add('pet-modal-overlay--closing');
-
         setTimeout(() => {
             overlay.remove();
-
-            // Spawn the pet
-            const pet = PETS.find(p => p.id === selectedId);
-            if (pet) {
-                spawnPet(pet);
-                createChangePetButton();
-            }
-        }, 400); // Match fadeOut animation duration
+            spawnPet(selectedId);
+            createChangePetButton();
+        }, 400);
     });
-
     modal.appendChild(confirmBtn);
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
@@ -163,142 +327,110 @@ function showSelectionModal() {
 /* ============================================================
    Pet Spawning & Cursor Following
    ============================================================ */
+function spawnPet(petId) {
+    activePet = petId;
+    petFrames = allFrames[petId];
+    frameIndex = 0;
+    frameTick = 0;
 
-/**
- * Spawns the chosen pet on screen and begins cursor tracking.
- * @param {Object} pet - Pet object from the PETS array.
- */
-function spawnPet(pet) {
-    activePet = pet;
+    // Create the pet canvas element
+    petCanvas = document.createElement('canvas');
+    petCanvas.width = SPRITE_SIZE * SCALE;
+    petCanvas.height = SPRITE_SIZE * SCALE;
+    petCanvas.className = 'browsing-pet';
+    petCanvas.style.imageRendering = 'pixelated';
+    petCanvas.setAttribute('aria-hidden', 'true');
+    petCtx = petCanvas.getContext('2d');
+    document.body.appendChild(petCanvas);
 
-    // Create pet element
-    petElement = document.createElement('div');
-    petElement.className = 'browsing-pet browsing-pet--idle';
-    petElement.textContent = pet.sprite;
-    petElement.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(petElement);
-
-    // Start at bottom-left of viewport
+    // Start position
     petX = 60;
     petY = window.innerHeight - 60;
     targetX = petX;
     targetY = petY;
+
+    drawFrame(0);
     updatePetPosition();
 
-    // Track mouse movement
     document.addEventListener('mousemove', onMouseMove);
-
-    // Track touch movement (mobile)
     document.addEventListener('touchmove', onTouchMove, { passive: true });
-
-    // Start the animation loop
     startAnimationLoop();
 }
 
-/**
- * Mouse move handler — updates target position.
- * @param {MouseEvent} e
- */
-function onMouseMove(e) {
-    // Offset the target so the pet sits below-right of the cursor
-    targetX = e.clientX + 15;
-    targetY = e.clientY + 15;
+/** Draw a specific frame onto the pet canvas */
+function drawFrame(idx) {
+    petCtx.clearRect(0, 0, petCanvas.width, petCanvas.height);
+    const frame = petFrames[idx];
+    frame.forEach(px => {
+        petCtx.fillStyle = px.c;
+        petCtx.fillRect(px.x * SCALE, px.y * SCALE, SCALE, SCALE);
+    });
 }
 
-/**
- * Touch move handler — updates target position for mobile.
- * @param {TouchEvent} e
- */
+function onMouseMove(e) {
+    targetX = e.clientX + 20;
+    targetY = e.clientY + 20;
+}
+
 function onTouchMove(e) {
     if (e.touches.length > 0) {
-        targetX = e.touches[0].clientX + 15;
-        targetY = e.touches[0].clientY + 15;
+        targetX = e.touches[0].clientX + 20;
+        targetY = e.touches[0].clientY + 20;
     }
 }
 
-/**
- * Animation loop — smoothly interpolates pet position toward
- * the cursor using lerp (linear interpolation). Also manages
- * the trotting vs. idle animation state.
- */
 function startAnimationLoop() {
-    /** Interpolation speed (0–1). Lower = smoother/slower following. */
     const LERP_SPEED = 0.08;
-
-    /** Distance threshold for considering the pet "arrived" */
     const ARRIVAL_THRESHOLD = 2;
+    const FRAME_INTERVAL = 12; // ticks between frame swaps
 
-    /**
-     * Single frame update.
-     */
     function tick() {
-        // Lerp toward target
         petX += (targetX - petX) * LERP_SPEED;
         petY += (targetY - petY) * LERP_SPEED;
-
-        // Clamp to viewport
-        petX = Math.max(0, Math.min(window.innerWidth - 30, petX));
-        petY = Math.max(0, Math.min(window.innerHeight - 30, petY));
-
+        petX = Math.max(0, Math.min(window.innerWidth - 48, petX));
+        petY = Math.max(0, Math.min(window.innerHeight - 48, petY));
         updatePetPosition();
 
-        // Check distance to target
         const dx = targetX - petX;
         const dy = targetY - petY;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance > ARRIVAL_THRESHOLD) {
-            // Pet is moving — show trot animation
-            if (!isMoving) {
-                isMoving = true;
-                petElement.classList.remove('browsing-pet--idle');
-                petElement.classList.add('browsing-pet--moving');
-                clearTimeout(idleTimeout);
-            }
-
-            // Flip horizontally based on movement direction
-            if (dx < -5) {
-                petElement.style.transform = 'scaleX(-1)';
-            } else if (dx > 5) {
-                petElement.style.transform = 'scaleX(1)';
+            if (!isMoving) { isMoving = true; clearTimeout(idleTimeout); }
+            // Flip based on direction
+            petCanvas.style.transform = dx < -5 ? 'scaleX(-1)' : 'scaleX(1)';
+            // Animate walk cycle
+            frameTick++;
+            if (frameTick >= FRAME_INTERVAL) {
+                frameTick = 0;
+                frameIndex = (frameIndex + 1) % petFrames.length;
+                drawFrame(frameIndex);
             }
         } else {
-            // Pet has arrived — switch to idle after a brief pause
             if (isMoving) {
                 isMoving = false;
                 clearTimeout(idleTimeout);
                 idleTimeout = setTimeout(() => {
-                    petElement.classList.remove('browsing-pet--moving');
-                    petElement.classList.add('browsing-pet--idle');
-                    petElement.style.transform = '';
-                }, 200);
+                    petCanvas.style.transform = '';
+                    drawFrame(0);
+                }, 300);
             }
         }
-
         animFrameId = requestAnimationFrame(tick);
     }
-
     animFrameId = requestAnimationFrame(tick);
 }
 
-/**
- * Updates the pet element's CSS position.
- */
 function updatePetPosition() {
-    if (petElement) {
-        petElement.style.left = `${petX}px`;
-        petElement.style.top = `${petY}px`;
+    if (petCanvas) {
+        petCanvas.style.left = petX + 'px';
+        petCanvas.style.top = petY + 'px';
     }
 }
 
 /* ============================================================
    Change Pet Button
-   Small button in the bottom-left corner to re-open the modal.
    ============================================================ */
-
-/**
- * Creates a small paw button that lets the user change their pet.
- */
 function createChangePetButton() {
     const btn = document.createElement('button');
     btn.className = 'pet-change-btn';
@@ -307,36 +439,15 @@ function createChangePetButton() {
     btn.setAttribute('aria-label', 'Change browsing pet');
 
     btn.addEventListener('click', () => {
-        // Remove current pet
-        if (petElement) {
-            petElement.remove();
-            petElement = null;
-        }
-        if (animFrameId) {
-            cancelAnimationFrame(animFrameId);
-        }
+        if (petCanvas) { petCanvas.remove(); petCanvas = null; }
+        if (animFrameId) cancelAnimationFrame(animFrameId);
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('touchmove', onTouchMove);
         clearTimeout(idleTimeout);
         isMoving = false;
-
-        // Remove change button itself
         btn.remove();
-
-        // Clear storage and show modal again
         localStorage.removeItem(PET_STORAGE_KEY);
         showSelectionModal();
     });
-
     document.body.appendChild(btn);
-}
-
-/* ============================================================
-   Respect Reduced Motion
-   If the user prefers reduced motion, disable pet animations
-   but still allow the companion to exist statically.
-   ============================================================ */
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // Override the lerp speed to be instant
-    // (The CSS already disables keyframe animations)
 }

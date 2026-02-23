@@ -108,10 +108,9 @@
     box-shadow: 0 0 20px rgba(0, 255, 247, 0.15);
 }
 
-/* The pet emoji/sprite */
+/* The pet pixel art preview canvas */
 .pet-choice__sprite {
-    font-size: 2.2rem;
-    line-height: 1;
+    image-rendering: pixelated;
     transition: transform 0.3s ease;
 }
 
@@ -154,49 +153,14 @@
     box-shadow: 0 8px 25px rgba(0, 255, 247, 0.3);
 }
 
-/* ---- The Cursor-Following Pet ---- */
+/* ---- The Cursor-Following Pet (Canvas) ---- */
 .browsing-pet {
     position: fixed;
     z-index: 9999;
     pointer-events: none;
-    font-size: 2rem;
-    line-height: 1;
-    transition: none;
-    /* Movement handled by JS for smooth interpolation */
+    image-rendering: pixelated;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
     user-select: none;
-}
-
-/* Trotting/bobbing animation while the pet moves */
-.browsing-pet--moving {
-    animation: petTrot 0.3s ease-in-out infinite alternate;
-}
-
-@keyframes petTrot {
-    0% {
-        transform: translateY(0) rotate(-3deg);
-    }
-
-    100% {
-        transform: translateY(-6px) rotate(3deg);
-    }
-}
-
-/* Idle breathing animation when stationary */
-.browsing-pet--idle {
-    animation: petIdle 2s ease-in-out infinite;
-}
-
-@keyframes petIdle {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-3px) scale(1.05);
-    }
 }
 
 /* ---- Change Pet Button (small, bottom-left) ---- */
